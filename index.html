@@ -3,161 +3,220 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>موقع حب وورد</title>
+<title>موقع حب وورد متحرك</title>
+
+<!-- خطوط -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+
+<!-- GSAP مكتبة -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-  body {
-    margin: 0;
-    font-family: 'Cairo', sans-serif;
-    background: linear-gradient(135deg, #fce4ec, #d0f0c0);
-    overflow-x: hidden;
-    position: relative;
-    min-height: 100vh;
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
   }
-  header {
-    padding: 50px 20px;
+  html, body {
+    height: 100%;
+    font-family: 'Cairo', sans-serif;
+    overflow-x: hidden;
+  }
+  body {
+    position: relative;
+    color: #fff;
+    background: linear-gradient(135deg, #5a0e0e, #9b1e1e);
+  }
+  /* فيديو خلفية */
+  #bg-video {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.5) saturate(1.2);
+  }
+  /* طبقة سوداء شفافة فوق الفيديو */
+  #overlay {
+    position: fixed;
+    top:0; left:0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 0;
+  }
+  /* محتوى الموقع */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 20px 50px;
     text-align: center;
-    color: #880e4f;
   }
   h1 {
-    font-size: 3em;
-    margin-bottom: 0.2em;
-    animation: fadeInDown 1.5s ease forwards;
+    font-size: 4rem;
+    margin-bottom: 0.3em;
+    text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081;
   }
-  p.desc {
-    font-size: 1.3em;
-    margin-top: 0;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    animation: fadeInUp 1.5s ease forwards;
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 0.8em;
+    text-shadow: 0 0 6px #f48fb1;
   }
-  button#langToggle {
-    background: #880e4f;
-    color: white;
+  p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 20px auto;
+    text-shadow: 0 0 5px rgba(0,0,0,0.6);
+  }
+  /* أزرار التبديل */
+  #langToggle {
+    margin-top: 30px;
+    background: #ff4081;
     border: none;
-    border-radius: 30px;
-    padding: 10px 25px;
-    font-size: 1.1em;
+    padding: 12px 28px;
+    border-radius: 40px;
+    font-size: 1.2rem;
     cursor: pointer;
-    margin-top: 20px;
+    box-shadow: 0 0 15px #ff4081;
     transition: background 0.3s ease;
   }
-  button#langToggle:hover {
-    background: #ad1457;
+  #langToggle:hover {
+    background: #e040fb;
   }
-  /* Animations */
-  @keyframes fadeInDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* تزيين النص */
+  .glow-text {
+    color: #ff79b0;
+    text-shadow:
+      0 0 7px #ff79b0,
+      0 0 15px #ff4081,
+      0 0 20px #ff4081,
+      0 0 40px #ff4081;
   }
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  /* Floating flowers */
-  .flower {
+
+  /* ورود تتساقط */
+  .falling-flower {
     position: fixed;
-    pointer-events: none;
+    top: -50px;
+    font-size: 24px;
+    color: #ff79b0;
     user-select: none;
-    z-index: 1000;
-    animation-name: floatFlower;
+    pointer-events: none;
+    z-index: 9999;
+    animation-name: fall;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
-  @keyframes floatFlower {
+  @keyframes fall {
     0% {
-      transform: translateY(100vh) translateX(0) rotate(0deg);
+      transform: translateY(0) rotate(0deg);
       opacity: 1;
     }
     100% {
-      transform: translateY(-10vh) translateX(50px) rotate(360deg);
+      transform: translateY(110vh) rotate(360deg);
       opacity: 0;
     }
   }
-  /* Language containers */
-  .lang-content {
-    display: none;
-    padding: 20px;
+  /* موسيقى */
+  #audioControl {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff4081cc;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff4081;
+    transition: background 0.3s ease;
   }
-  .lang-content.active {
-    display: block;
+  #audioControl:hover {
+    background: #e040fbcc;
   }
-  /* Sections */
-  section {
-    max-width: 700px;
-    margin: 40px auto;
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    color: #4a148c;
-    animation: fadeInUp 1.5s ease forwards;
+  #audioControl svg {
+    fill: white;
+    width: 28px;
+    height: 28px;
   }
-  /* Footer */
-  footer {
-    text-align: center;
-    margin: 50px 20px 30px;
-    color: #880e4f;
-    font-size: 1em;
+  /* Responsive */
+  @media(max-width:600px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <h1 id="title">أهلاً بكم في موقعي</h1>
-  <p class="desc" id="desc">موقع مليان حب وجمال وورد.</p>
+<!-- فيديو الخلفية -->
+<video id="bg-video" autoplay muted loop playsinline>
+  <source src="https://cdn.pixabay.com/vimeo/358965954/flower-3-2048.mp4?width=1280&hash=5634e476e61ef03c3e5c353f7a8899b87b6d80c1" type="video/mp4">
+  متصفحك لا يدعم الفيديو.
+</video>
+<div id="overlay"></div>
+
+<main>
+  <h1 class="glow-text" id="title">أهلاً بكم في عالمي</h1>
+  <p id="desc">مكان مليان حب، ورود، ومشاعر جياشة من القلب</p>
   <button id="langToggle">English</button>
-</header>
 
-<!-- Arabic content -->
-<div id="arabic" class="lang-content active">
-  <section>
-    <h2>كلمات من القلب</h2>
-    <p>يا زهرة عمري، يا أجمل حب، يا دفء أيامي وأجمل أماني. حبك في قلبي مثل النور اللي ما ينطفئ، وروحك تسكن كل لحظة في حياتي.</p>
-  </section>
-  <section>
-    <h2>ذكريات لا تُنسى</h2>
-    <p>كل ضحكة منك تشعّ في عيوني، وكل كلمة منك تلمس أعماق روحي. أتذكر دفء حضنك وحنانك الذي يعانق قلبي دائمًا.</p>
-  </section>
-  <section>
-    <h2>مشاعر جياشة</h2>
-    <p>حبك يا أمي يفيض مثل نهر لا ينضب، ينبض في قلبي ويعانق روحي. وجودك معي هو الحياة التي أحلم بها، ولا شيء يوازي عظمة حبك.</p>
-  </section>
+  <div id="arabic" class="lang-content active" style="margin-top:40px;">
+    <section>
+      <h2>كلمات من القلب</h2>
+      <p>يا زهرة عمري، أنتِ الروح والنبض، يا دفء أيامي وأجمل أماني. حبكِ ينساب في قلبي مثل نهر لا ينتهي، وروحك تسكن كل جزء مني.</p>
+    </section>
+    <section>
+      <h2>ذكريات لا تُنسى</h2>
+      <p>ضحكتكِ تملأ حياتي بهجة، صوتك يهدئ روحي، ويدك الحانية تزرع الأمان في كل لحظة.</p>
+    </section>
+    <section>
+      <h2>مشاعر جياشة</h2>
+      <p>حبكِ يفيض كالنهر، ينبض في قلبي ويغمر روحي. وجودك معي هو حياتي، ولا شيء يضاهي عظمة حبكِ.</p>
+    </section>
+  </div>
+
+  <div id="english" class="lang-content" style="display:none; margin-top:40px;">
+    <section>
+      <h2>Words from the Heart</h2>
+      <p>You are the flower of my life, the soul and heartbeat, the warmth of my days and my sweetest wishes. Your love flows in my heart like an endless river, and your spirit lives in every part of me.</p>
+    </section>
+    <section>
+      <h2>Unforgettable Memories</h2>
+      <p>Your laughter fills my life with joy, your voice calms my soul, and your gentle hand plants safety in every moment.</p>
+    </section>
+    <section>
+      <h2>Deep Emotions</h2>
+      <p>Your love overflows like a river, beating in my heart and flooding my soul. Having you with me is my life, and nothing compares to the greatness of your love.</p>
+    </section>
+  </div>
+</main>
+
+<!-- زر التحكم بالموسيقى -->
+<div id="audioControl" title="تشغيل / إيقاف الموسيقى">
+  <svg id="audioIcon" viewBox="0 0 24 24">
+    <path d="M3 9v6h4l5 5V4L7 9H3z"></path>
+  </svg>
 </div>
 
-<!-- English content -->
-<div id="english" class="lang-content">
-  <section>
-    <h2>Words from the Heart</h2>
-    <p>You are the flower of my life, the sweetest love, the warmth of my days, and my greatest wishes. Your love in my heart is like an eternal light, your soul lives in every moment of my life.</p>
-  </section>
-  <section>
-    <h2>Unforgettable Memories</h2>
-    <p>Every smile from you shines in my eyes, every word touches the depths of my soul. I remember your warm embrace and tenderness that always hugs my heart.</p>
-  </section>
-  <section>
-    <h2>Deep Emotions</h2>
-    <p>Your love, Mom, flows like an endless river, beating in my heart and embracing my soul. Having you with me is the life I dream of, and nothing compares to the greatness of your love.</p>
-  </section>
-</div>
-
-<footer>موقع من تصميم عبدالرحمن ❤️ | Designed by Abdelrahman ❤️</footer>
+<audio id="backgroundMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/02/23/audio_317a427af1.mp3?filename=relaxing-music-ambient-10889.mp3" type="audio/mpeg">
+  المتصفح لا يدعم تشغيل الموسيقى
+</audio>
 
 <script>
+  // التبديل بين العربية والإنجليزية
   const langToggle = document.getElementById('langToggle');
   const arabicContent = document.getElementById('arabic');
   const englishContent = document.getElementById('english');
@@ -165,49 +224,61 @@
   const desc = document.getElementById('desc');
 
   langToggle.addEventListener('click', () => {
-    if (arabicContent.classList.contains('active')) {
-      // Switch to English
-      arabicContent.classList.remove('active');
-      englishContent.classList.add('active');
-      title.textContent = "Welcome to My Website";
-      desc.textContent = "A site full of love and beautiful flowers.";
+    if (arabicContent.style.display !== 'none') {
+      arabicContent.style.display = 'none';
+      englishContent.style.display = 'block';
+      title.textContent = "Welcome to My World";
+      desc.textContent = "A place full of love, flowers, and deep heartfelt emotions";
       langToggle.textContent = "عربي";
       document.documentElement.dir = "ltr";
       document.documentElement.lang = "en";
     } else {
-      // Switch to Arabic
-      englishContent.classList.remove('active');
-      arabicContent.classList.add('active');
-      title.textContent = "أهلاً بكم في موقعي";
-      desc.textContent = "موقع مليان حب وجمال وورد.";
+      arabicContent.style.display = 'block';
+      englishContent.style.display = 'none';
+      title.textContent = "أهلاً بكم في عالمي";
+      desc.textContent = "مكان مليان حب، ورود، ومشاعر جياشة من القلب";
       langToggle.textContent = "English";
       document.documentElement.dir = "rtl";
       document.documentElement.lang = "ar";
     }
   });
 
-  // Floating flowers animation generation
+  // ورود تتساقط
   function createFlower() {
     const flower = document.createElement('div');
-    flower.classList.add('flower');
-    flower.style.width = flower.style.height = (Math.random() * 40 + 20) + 'px';
+    flower.classList.add('falling-flower');
     flower.style.left = Math.random() * window.innerWidth + 'px';
-    flower.style.animationDuration = (10 + Math.random() * 15) + 's';
-    flower.style.animationDelay = (Math.random() * 10) + 's';
-
-    // Simple flower emoji as flower shape
-    flower.textContent = '🌸';
+    flower.style.fontSize = (12 + Math.random() * 20) + 'px';
+    flower.style.animationDuration = (8 + Math.random() * 8) + 's';
+    flower.style.opacity = Math.random();
+    flower.textContent = '🌺';
     document.body.appendChild(flower);
 
-    // Remove after animation to keep DOM clean
     setTimeout(() => {
       flower.remove();
-    }, 25000);
+    }, 16000);
   }
-
-  // Create multiple flowers periodically
   setInterval(createFlower, 500);
 
+  // تشغيل / إيقاف الموسيقى
+  const audioControl = document.getElementById('audioControl');
+  const backgroundMusic = document.getElementById('backgroundMusic');
+  const audioIcon = document.getElementById('audioIcon');
+  let isPlaying = false;
+
+  audioControl.addEventListener('click', () => {
+    if (isPlaying) {
+      backgroundMusic.pause();
+      audioIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3z"></path>'; // أيقونة تشغيل
+    } else {
+      backgroundMusic.play();
+      audioIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>'; // أيقونة إيقاف
+    }
+    isPlaying = !isPlaying;
+  });
+
+  // تأثير GSAP للعنصر الرئيسي
+  gsap.from("main", {duration: 1.5, y: 50, opacity: 0, ease: "power3.out"});
 </script>
 
 </body>
