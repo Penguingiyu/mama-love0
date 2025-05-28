@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>موقع حب وورد متحرك</title>
+<title>موقع حب وورد متحرك - عبد الرحمن وجنى</title>
 
 <!-- خطوط -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
 
-<!-- GSAP مكتبة -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
-  /* Reset */
   * {
     margin: 0; padding: 0; box-sizing: border-box;
   }
@@ -20,39 +18,33 @@
     height: 100%;
     font-family: 'Cairo', sans-serif;
     overflow-x: hidden;
-  }
-  body {
-    position: relative;
-    color: #fff;
     background: linear-gradient(135deg, #5a0e0e, #9b1e1e);
+    color: #fff;
   }
-  /* فيديو خلفية */
   #bg-video {
     position: fixed;
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
     object-fit: cover;
-    z-index: -1;
+    z-index: -2;
     filter: brightness(0.5) saturate(1.2);
   }
-  /* طبقة سوداء شفافة فوق الفيديو */
   #overlay {
     position: fixed;
     top:0; left:0;
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,0.5);
-    z-index: 0;
+    z-index: -1;
   }
-  /* محتوى الموقع */
   main {
     position: relative;
-    z-index: 10;
     max-width: 900px;
     margin: 0 auto;
     padding: 100px 20px 50px;
     text-align: center;
+    z-index: 10;
   }
   h1 {
     font-size: 4rem;
@@ -60,18 +52,27 @@
     text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081;
   }
   h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 0.8em;
-    text-shadow: 0 0 6px #f48fb1;
+    text-shadow: 0 0 8px #f48fb1;
   }
   p {
     font-size: 1.3rem;
     line-height: 1.6;
     max-width: 700px;
-    margin: 20px auto;
+    margin: 20px auto 40px;
     text-shadow: 0 0 5px rgba(0,0,0,0.6);
+    position: relative;
   }
-  /* أزرار التبديل */
+  .author {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    font-size: 0.9rem;
+    color: #ff79b0;
+    font-weight: 700;
+    font-style: italic;
+  }
   #langToggle {
     margin-top: 30px;
     background: #ff4081;
@@ -86,7 +87,6 @@
   #langToggle:hover {
     background: #e040fb;
   }
-  /* تزيين النص */
   .glow-text {
     color: #ff79b0;
     text-shadow:
@@ -95,44 +95,20 @@
       0 0 20px #ff4081,
       0 0 40px #ff4081;
   }
-  /* ورود تتساقط نصية مخفية */
   .falling-flower {
     position: fixed;
-    top: -50px;
-    font-size: 24px;
-    color: #ff79b0;
-    user-select: none;
-    pointer-events: none;
-    z-index: 9999;
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-  @keyframes fall {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(110vh) rotate(360deg);
-      opacity: 0;
-    }
-  }
-  /* ورود صور تتساقط */
-  .falling-image {
-    position: fixed;
-    top: -100px;
+    top: -60px;
     width: 40px;
     height: 40px;
     object-fit: contain;
     user-select: none;
     pointer-events: none;
     z-index: 9999;
-    animation-name: fallImage;
+    animation-name: fallFlower;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
-  @keyframes fallImage {
+  @keyframes fallFlower {
     0% {
       transform: translateY(0) rotate(0deg);
       opacity: 1;
@@ -142,32 +118,6 @@
       opacity: 0;
     }
   }
-  /* موسيقى */
-  #audioControl {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #ff4081cc;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 0 12px #ff4081;
-    transition: background 0.3s ease;
-  }
-  #audioControl:hover {
-    background: #e040fbcc;
-  }
-  #audioControl svg {
-    fill: white;
-    width: 28px;
-    height: 28px;
-  }
-  /* Responsive */
   @media(max-width:600px) {
     h1 {
       font-size: 2.5rem;
@@ -183,9 +133,8 @@
 </head>
 <body>
 
-<!-- فيديو الخلفية -->
 <video id="bg-video" autoplay muted loop playsinline>
-  <source src="https://cdn.pixabay.com/vimeo/358965954/flower-3-2048.mp4?width=1280&hash=5634e476e61ef03c3e5c353f7a8899b87b6d80c1" type="video/mp4">
+  <source src="https://cdn.pixabay.com/vimeo/358965954/flower-3-2048.mp4?width=1280&hash=5634e476e61ef03c3e5c353f7a8899b87b6d80c1" type="video/mp4" />
   متصفحك لا يدعم الفيديو.
 </video>
 <div id="overlay"></div>
@@ -198,32 +147,201 @@
   <div id="arabic" class="lang-content active" style="margin-top:40px;">
     <section>
       <h2>كلمات من القلب</h2>
-      <p>يا زهرة عمري، أنتِ الروح والنبض، يا دفء أيامي وأجمل أماني. حبكِ ينساب في قلبي مثل نهر لا ينتهي، وروحك تسكن كل جزء مني.</p>
+      <p>يا زهرة عمري، أنتِ الروح والنبض، يا دفء أيامي وأجمل أماني. حبكِ ينساب في قلبي مثل نهر لا ينتهي، وروحك تسكن كل جزء مني.
+        <span class="author">- جنى</span>
+      </p>
     </section>
     <section>
       <h2>ذكريات لا تُنسى</h2>
-      <p>ضحكتكِ تملأ حياتي بهجة، صوتك يهدئ روحي، ويدك الحانية تزرع الأمان في كل لحظة.</p>
+      <p>ضحكتكِ تملأ حياتي بهجة، صوتك يهدئ روحي، ويدك الحانية تزرع الأمان في كل لحظة.
+        <span class="author">- جنى</span>
+      </p>
     </section>
     <section>
       <h2>مشاعر جياشة</h2>
-      <p>حبكِ يفيض كالنهر، ينبض في قلبي ويغمر روحي. وجودك معي هو حياتي، ولا شيء يضاهي عظمة حبكِ.</p>
+      <p>حبكِ يفيض كالنهر، ينبض في قلبي ويغمر روحي. وجودك معي هو حياتي، ولا شيء يضاهي عظمة حبكِ.
+        <span class="author">- جنى</span>
+      </p>
     </section>
     <section>
       <h2>رسالة حب خاصة</h2>
-      <p>أمي، يا أجمل هدية منحني الله إياها، أنتِ السند والملاذ، وأغلى ما أملك. مهما كتبت من كلمات لن أوفيك حقك، فأنتِ النور الذي يضيء حياتي.</p>
+      <p>أمي، يا أجمل هدية منحني الله إياها، أنتِ السند والملاذ، وأغلى ما أملك. مهما كتبت من كلمات لن أوفيك حقك، فأنتِ النور الذي يضيء حياتي.
+        <span class="author">- جنى</span>
+      </p>
     </section>
     <section>
       <h2>شكر وامتنان</h2>
-      <p>أشكرك على كل تضحياتك، على كل لحظة صبر، على كل دمعة لم تذرفيها أمامي. أنتِ قدوتي ومصدر قوتي.</p>
+      <p>أشكرك على كل تضحياتك، على كل لحظة صبر، على كل دمعة لم تذرفيها أمامي. أنتِ قدوتي ومصدر قوتي.
+        <span class="author">- جنى</span>
+      </p>
     </section>
     <section>
       <h2>أحلام وأماني</h2>
-      <p>أتمنى لكِ حياة مليئة بالسعادة، والصحة، والسلام، وأن أكون دومًا سببًا في فرحتك ورضاك.</p>
+      <p>أتمنى لكِ حياة مليئة بالسعادة، والصحة، والسلام، وأن أكون دومًا سببًا في فرحتك ورضاك.
+        <span class="author">- جنى</span>
+      </p>
     </section>
     <section>
       <h2>كلمات ودعاء</h2>
-      <p>اللهم احفظ أمي وبارك في عمرها، وامنحها راحة البال، وارزقها أجمل أيام العمر.</p>
+      <p>اللهم احفظ أمي وبارك في عمرها، وامنحها راحة البال، وارزقها أجمل أيام العمر.
+        <span class="author">- جنى</span>
+      </p>
+    </section>
+    <!-- إضافات شعرية جديدة -->
+    <section>
+      <h2>شعر من القلب</h2>
+      <p>يا من أضاءت لي الدروب بنور حنانها<br/>
+      وأعطتني من الحب أجمل ألوانها<br/>
+      في حضنها وجدت السلام والدفء<br/>
+      يا أمي، بحبك قلبي يعانق الأزمان
+        <span class="author">- جنى</span>
+      </p>
+    </section>
+    <section>
+      <h2>أنشودة حب</h2>
+      <p>أمي يا نبع الحنان العذب<br/>
+      يا أغلى من روحي والنبض<br/>
+      أضاءت حياتي بحبها<br/>
+      وأعطتني في الدنيا كل شيء وأغلى حب
+        <span class="author">- جنى</span>
+      </p>
+    </section>
+    <section>
+      <h2>أجمل الأماني</h2>
+      <p>أسأل الله أن يحفظك لي<br/>
+      ويملأ حياتك فرحًا ويغنيك عن كل هم<br/>
+      يا من بسمة وجهها تمحو الحزن<br/>
+      وأجمل هدية أعطاها لي الزمن
+        <span class="author">- جنى</span>
+      </p>
+    </section>
+    <section>
+      <h2>روح أمي</h2>
+      <p>في عينيك أرى الدنيا بألوانها<br/>
+      وفي قلبك دفء يملأ الأحلام<br/>
+      أمي يا زهرة العمر وربيع حياتي<br/>
+      بحبك أعيش وأحلم بأجمل الأيام
+        <span class="author">- جنى</span>
+      </p>
     </section>
   </div>
 
-  <div id="english
+  <div id="english" class="lang-content" style="display:none; margin-top:40px;">
+    <section>
+      <h2>Words From The Heart</h2>
+      <p>You are the flower of my life, the purest love, the warmth of my days and my sweetest dreams. Your love flows through my heart like an endless river, your soul inhabits every part of me.
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>Unforgettable Memories</h2>
+      <p>Your laughter fills my life with joy, your voice calms my soul, and your gentle hand plants safety in every moment.
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>Deep Emotions</h2>
+      <p>Your love overflows like a river, pulsing in my heart and flooding my soul. Having you with me is my life, and nothing compares to the greatness of your love.
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>A Special Love Message</h2>
+      <p>Mom, you are the most beautiful gift God gave me. You are my support and refuge, and my dearest possession. No words can express your worth; you are the light that brightens my life.
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>Thanks & Gratitude</h2>
+      <p>Thank you for all your sacrifices, for every moment of patience, for every tear you held back for me. You are my role model and source of strength.
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>Dreams & Wishes</h2>
+      <p>I wish you a life full of happiness, health, and peace, and may I always be a reason for your joy and contentment.
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>Words & Prayers</h2>
+      <p>May God protect my mom, bless her life, grant her peace of mind, and gift her the most beautiful days of life.
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <!-- New poetry additions in English -->
+    <section>
+      <h2>Poetry From The Heart</h2>
+      <p>You who lit my paths with the light of kindness<br/>
+      And gave me the most beautiful colors of love<br/>
+      In your embrace I found peace and warmth<br/>
+      Mom, with your love my heart embraces time
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>Love Hymn</h2>
+      <p>Mom, fountain of gentle care<br/>
+      Dearest than my soul and my heartbeat<br/>
+      You brightened my life with your love<br/>
+      And gave me everything and the sweetest love
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>Sweetest Wishes</h2>
+      <p>I pray God keeps you safe for me<br/>
+      And fills your life with joy and lifts every sorrow<br/>
+      Your smile erases all sadness<br/>
+      The most beautiful gift that time has given me
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+    <section>
+      <h2>Mom's Spirit</h2>
+      <p>In your eyes, I see the world in colors<br/>
+      In your heart, warmth fills my dreams<br/>
+      Mom, flower of my life and spring of my days<br/>
+      With your love, I live and dream the sweetest days
+        <span class="author">- Jana</span>
+      </p>
+    </section>
+  </div>
+</main>
+
+<!-- ورود متحركة -->
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:5%; animation-duration: 20s; animation-delay: 0s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:15%; animation-duration: 18s; animation-delay: 2s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:25%; animation-duration: 16s; animation-delay: 4s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:35%; animation-duration: 19s; animation-delay: 1s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:45%; animation-duration: 22s; animation-delay: 5s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:55%; animation-duration: 17s; animation-delay: 1s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:65%; animation-duration: 19s; animation-delay: 4s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:75%; animation-duration: 15s; animation-delay: 3.5s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:85%; animation-duration: 14s; animation-delay: 7s;" />
+<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:95%; animation-duration: 18s; animation-delay: 6.5s;" />
+
+<script>
+  // تبديل اللغة بين العربي والإنجليزي
+  const toggleBtn = document.getElementById('langToggle');
+  const arabicContent = document.getElementById('arabic');
+  const englishContent = document.getElementById('english');
+  toggleBtn.addEventListener('click', () => {
+    if (arabicContent.style.display !== 'none') {
+      arabicContent.style.display = 'none';
+      englishContent.style.display = 'block';
+      toggleBtn.textContent = 'العربية';
+      document.getElementById('title').textContent = 'Welcome to My World';
+      document.getElementById('desc').textContent = 'A place full of love, flowers, and heartfelt emotions';
+    } else {
+      arabicContent.style.display = 'block';
+      englishContent.style.display = 'none';
+      toggleBtn.textContent = 'English';
+      document.getElementById('title').textContent = 'أهلاً بكم في عالمي';
+      document.getElementById('desc').textContent = 'مكان مليان حب، ورود، ومشاعر جياشة من القلب';
+    }
+  });
+</script>
+
+</body>
+</html>
