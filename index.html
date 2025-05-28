@@ -5,10 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>موقع حب وورد متحرك - عبد الرحمن وجنى</title>
 
-<!-- خطوط -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <style>
   * {
@@ -18,95 +15,84 @@
     height: 100%;
     font-family: 'Cairo', sans-serif;
     overflow-x: hidden;
-    background: linear-gradient(135deg, #5a0e0e, #9b1e1e);
-    color: #fff;
-  }
-  #bg-video {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -2;
-    filter: brightness(0.5) saturate(1.2);
-  }
-  #overlay {
-    position: fixed;
-    top:0; left:0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.5);
-    z-index: -1;
+    background: linear-gradient(135deg, #f9f4f7, #e3dff2);
+    color: #333;
   }
   main {
     position: relative;
     max-width: 900px;
-    margin: 0 auto;
-    padding: 100px 20px 50px;
+    margin: 80px auto 60px;
+    padding: 30px 20px;
+    background: rgba(255 255 255 / 0.85);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(150, 100, 150, 0.2);
     text-align: center;
     z-index: 10;
   }
   h1 {
-    font-size: 4rem;
-    margin-bottom: 0.3em;
-    text-shadow: 0 0 10px #ff4081, 0 0 20px #ff4081;
+    font-size: 3.8rem;
+    margin-bottom: 0.4em;
+    color: #7b3fbf;
+    text-shadow: 0 2px 8px rgba(123, 63, 191, 0.4);
   }
   h2 {
-    font-size: 2.2rem;
-    margin-bottom: 0.8em;
-    text-shadow: 0 0 8px #f48fb1;
+    font-size: 2rem;
+    margin-bottom: 0.7em;
+    color: #a66dc1;
+    border-bottom: 2px solid #b185d8;
+    padding-bottom: 8px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
   }
   p {
-    font-size: 1.3rem;
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 20px auto 40px;
-    text-shadow: 0 0 5px rgba(0,0,0,0.6);
+    font-size: 1.25rem;
+    line-height: 1.7;
+    max-width: 720px;
+    margin: 18px auto 30px;
+    color: #4a3a57;
+    font-weight: 500;
     position: relative;
   }
   .author {
     position: absolute;
-    top: 5px;
+    top: 2px;
     right: 0;
-    font-size: 0.9rem;
-    color: #ff79b0;
+    font-size: 0.85rem;
+    color: #8a5da9;
     font-weight: 700;
     font-style: italic;
   }
   #langToggle {
-    margin-top: 30px;
-    background: #ff4081;
+    margin-top: 40px;
+    background: #7b3fbf;
     border: none;
-    padding: 12px 28px;
-    border-radius: 40px;
-    font-size: 1.2rem;
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-size: 1.15rem;
     cursor: pointer;
-    box-shadow: 0 0 15px #ff4081;
-    transition: background 0.3s ease;
+    color: white;
+    box-shadow: 0 5px 20px rgba(123, 63, 191, 0.45);
+    transition: background 0.35s ease;
   }
   #langToggle:hover {
-    background: #e040fb;
+    background: #a57edd;
   }
-  .glow-text {
-    color: #ff79b0;
-    text-shadow:
-      0 0 7px #ff79b0,
-      0 0 15px #ff4081,
-      0 0 20px #ff4081,
-      0 0 40px #ff4081;
-  }
+
+  /* ورود متحركة واضحة */
   .falling-flower {
     position: fixed;
     top: -60px;
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+    width: 50px;
+    height: 50px;
     user-select: none;
     pointer-events: none;
     z-index: 9999;
     animation-name: fallFlower;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    filter: drop-shadow(0 0 2px rgba(150, 80, 160, 0.6));
+    opacity: 0.9;
   }
   @keyframes fallFlower {
     0% {
@@ -118,9 +104,10 @@
       opacity: 0;
     }
   }
+
   @media(max-width:600px) {
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
     }
     h2 {
       font-size: 1.5rem;
@@ -128,19 +115,17 @@
     p {
       font-size: 1rem;
     }
+    .falling-flower {
+      width: 35px;
+      height: 35px;
+    }
   }
 </style>
 </head>
 <body>
 
-<video id="bg-video" autoplay muted loop playsinline>
-  <source src="https://cdn.pixabay.com/vimeo/358965954/flower-3-2048.mp4?width=1280&hash=5634e476e61ef03c3e5c353f7a8899b87b6d80c1" type="video/mp4" />
-  متصفحك لا يدعم الفيديو.
-</video>
-<div id="overlay"></div>
-
 <main>
-  <h1 class="glow-text" id="title">أهلاً بكم في عالمي</h1>
+  <h1 id="title">أهلاً بكم في عالمي</h1>
   <p id="desc">مكان مليان حب، ورود، ومشاعر جياشة من القلب</p>
   <button id="langToggle">English</button>
 
@@ -187,7 +172,6 @@
         <span class="author">- جنى</span>
       </p>
     </section>
-    <!-- إضافات شعرية جديدة -->
     <section>
       <h2>شعر من القلب</h2>
       <p>يا من أضاءت لي الدروب بنور حنانها<br/>
@@ -269,7 +253,6 @@
         <span class="author">- Jana</span>
       </p>
     </section>
-    <!-- New poetry additions in English -->
     <section>
       <h2>Poetry From The Heart</h2>
       <p>You who lit my paths with the light of kindness<br/>
@@ -309,23 +292,23 @@
   </div>
 </main>
 
-<!-- ورود متحركة -->
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:5%; animation-duration: 20s; animation-delay: 0s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:15%; animation-duration: 18s; animation-delay: 2s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:25%; animation-duration: 16s; animation-delay: 4s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:35%; animation-duration: 19s; animation-delay: 1s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:45%; animation-duration: 22s; animation-delay: 5s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:55%; animation-duration: 17s; animation-delay: 1s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:65%; animation-duration: 19s; animation-delay: 4s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:75%; animation-duration: 15s; animation-delay: 3.5s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:85%; animation-duration: 14s; animation-delay: 7s;" />
-<img src="https://i.postimg.cc/yNm9j6Kn/flower1.png" alt="ورد" class="falling-flower" style="left:95%; animation-duration: 18s; animation-delay: 6.5s;" />
+<!-- ورود متحركة أوضح -->
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:5%; animation-duration: 18s; animation-delay: 0s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:15%; animation-duration: 22s; animation-delay: 2s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:25%; animation-duration: 16s; animation-delay: 4s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:35%; animation-duration: 20s; animation-delay: 1s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:45%; animation-duration: 19s; animation-delay: 5s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:55%; animation-duration: 17s; animation-delay: 1s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:65%; animation-duration: 21s; animation-delay: 4s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:75%; animation-duration: 23s; animation-delay: 3.5s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:85%; animation-duration: 15s; animation-delay: 7s;" />
+<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:95%; animation-duration: 18s; animation-delay: 6.5s;" />
 
 <script>
-  // تبديل اللغة بين العربي والإنجليزي
   const toggleBtn = document.getElementById('langToggle');
   const arabicContent = document.getElementById('arabic');
   const englishContent = document.getElementById('english');
+
   toggleBtn.addEventListener('click', () => {
     if (arabicContent.style.display !== 'none') {
       arabicContent.style.display = 'none';
