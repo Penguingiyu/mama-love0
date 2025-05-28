@@ -1,91 +1,214 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إلى أمي الحبيبة</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Cairo', sans-serif;
-      background: linear-gradient(to bottom, #fce4ec, #f8bbd0);
-      color: #880e4f;
-      text-align: center;
-      overflow-x: hidden;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>موقع حب وورد</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  body {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #fce4ec, #d0f0c0);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+  header {
+    padding: 50px 20px;
+    text-align: center;
+    color: #880e4f;
+  }
+  h1 {
+    font-size: 3em;
+    margin-bottom: 0.2em;
+    animation: fadeInDown 1.5s ease forwards;
+  }
+  p.desc {
+    font-size: 1.3em;
+    margin-top: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 1.5s ease forwards;
+  }
+  button#langToggle {
+    background: #880e4f;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+  }
+  button#langToggle:hover {
+    background: #ad1457;
+  }
+  /* Animations */
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
     }
-    header {
-      padding: 80px 20px;
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
-    h1 {
-      font-size: 3em;
-      animation: fadeInDown 2s ease;
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
     }
-    p {
-      font-size: 1.5em;
-      max-width: 600px;
-      margin: 20px auto;
-      animation: fadeInUp 2s ease;
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .heart {
-      font-size: 3em;
-      color: red;
-      animation: pulse 1.5s infinite;
+  }
+  /* Floating flowers */
+  .flower {
+    position: fixed;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1000;
+    animation-name: floatFlower;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes floatFlower {
+    0% {
+      transform: translateY(100vh) translateX(0) rotate(0deg);
+      opacity: 1;
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+    100% {
+      transform: translateY(-10vh) translateX(50px) rotate(360deg);
+      opacity: 0;
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-    section {
-      padding: 60px 20px;
-      background: white;
-      border-top-left-radius: 50px;
-      border-top-right-radius: 50px;
-      box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-    }
-    .footer {
-      margin-top: 50px;
-      font-size: 0.9em;
-      color: #6a1b9a;
-    }
-  </style>
+  }
+  /* Language containers */
+  .lang-content {
+    display: none;
+    padding: 20px;
+  }
+  .lang-content.active {
+    display: block;
+  }
+  /* Sections */
+  section {
+    max-width: 700px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    color: #4a148c;
+    animation: fadeInUp 1.5s ease forwards;
+  }
+  /* Footer */
+  footer {
+    text-align: center;
+    margin: 50px 20px 30px;
+    color: #880e4f;
+    font-size: 1em;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="heart">❤️</div>
-    <h1>أمي.. يا نبع الحنان</h1>
-    <p>صممت هذا الموقع فقط لأقول لكِ: أحبكِ من كل قلبي. وجودك هو النور الذي يضيء أيامي.</p>
-  </header>
+
+<header>
+  <h1 id="title">أهلاً بكم في موقعي</h1>
+  <p class="desc" id="desc">موقع مليان حب وجمال وورد.</p>
+  <button id="langToggle">English</button>
+</header>
+
+<!-- Arabic content -->
+<div id="arabic" class="lang-content active">
   <section>
     <h2>كلمات من القلب</h2>
-    <p>يا زهرة عمري، يا أصدق حب، يا دفء أيامي وأجمل أمانيَّ. لن تكفي الكلمات لأصف كم أنا ممتنة لوجودك في حياتي.</p>
-    <p>كل لحظة معكِ هي نعمة، وكل دعوة منكِ هي بركة. أحبكِ فوق الوصف.</p>
+    <p>يا زهرة عمري، يا أجمل حب، يا دفء أيامي وأجمل أماني. حبك في قلبي مثل النور اللي ما ينطفئ، وروحك تسكن كل لحظة في حياتي.</p>
   </section>
   <section>
     <h2>ذكريات لا تُنسى</h2>
-    <p>أتذكّر ضحكتكِ في الصباح، صوتكِ الذي يطمئن قلبي، رائحتكِ التي تشبه الأمان.</p>
+    <p>كل ضحكة منك تشعّ في عيوني، وكل كلمة منك تلمس أعماق روحي. أتذكر دفء حضنك وحنانك الذي يعانق قلبي دائمًا.</p>
   </section>
   <section>
-    <h2>دروس من أمي</h2>
-    <p>علمتني أمي أن أكون قوية مهما تعبت، وأن أبتسم رغم الألم، وأن أقدّر النعم قبل أن أفقدها.</p>
+    <h2>مشاعر جياشة</h2>
+    <p>حبك يا أمي يفيض مثل نهر لا ينضب، ينبض في قلبي ويعانق روحي. وجودك معي هو الحياة التي أحلم بها، ولا شيء يوازي عظمة حبك.</p>
+  </section>
+</div>
+
+<!-- English content -->
+<div id="english" class="lang-content">
+  <section>
+    <h2>Words from the Heart</h2>
+    <p>You are the flower of my life, the sweetest love, the warmth of my days, and my greatest wishes. Your love in my heart is like an eternal light, your soul lives in every moment of my life.</p>
   </section>
   <section>
-    <h2>دعاء من القلب</h2>
-    <p>اللهم احفظ لي أمي، وأطل في عمرها، وبارك في صحتها، واجعل كل لحظة في حياتها سعادة لا تنتهي.</p>
+    <h2>Unforgettable Memories</h2>
+    <p>Every smile from you shines in my eyes, every word touches the depths of my soul. I remember your warm embrace and tenderness that always hugs my heart.</p>
   </section>
   <section>
-    <h2>رسالة ختامية</h2>
-    <p>كل كلمات الدنيا لن تكفي لأصفكِ. يا أمي، أنا أحبكِ وسأظل أكتب في حبكِ عمرًا بأكمله.</p>
+    <h2>Deep Emotions</h2>
+    <p>Your love, Mom, flows like an endless river, beating in my heart and embracing my soul. Having you with me is the life I dream of, and nothing compares to the greatness of your love.</p>
   </section>
-  <div class="footer">موقع من تصميم بودي لأعظم أم في الوجود ❤️</div>
+</div>
+
+<footer>موقع من تصميم عبدالرحمن ❤️ | Designed by Abdelrahman ❤️</footer>
+
+<script>
+  const langToggle = document.getElementById('langToggle');
+  const arabicContent = document.getElementById('arabic');
+  const englishContent = document.getElementById('english');
+  const title = document.getElementById('title');
+  const desc = document.getElementById('desc');
+
+  langToggle.addEventListener('click', () => {
+    if (arabicContent.classList.contains('active')) {
+      // Switch to English
+      arabicContent.classList.remove('active');
+      englishContent.classList.add('active');
+      title.textContent = "Welcome to My Website";
+      desc.textContent = "A site full of love and beautiful flowers.";
+      langToggle.textContent = "عربي";
+      document.documentElement.dir = "ltr";
+      document.documentElement.lang = "en";
+    } else {
+      // Switch to Arabic
+      englishContent.classList.remove('active');
+      arabicContent.classList.add('active');
+      title.textContent = "أهلاً بكم في موقعي";
+      desc.textContent = "موقع مليان حب وجمال وورد.";
+      langToggle.textContent = "English";
+      document.documentElement.dir = "rtl";
+      document.documentElement.lang = "ar";
+    }
+  });
+
+  // Floating flowers animation generation
+  function createFlower() {
+    const flower = document.createElement('div');
+    flower.classList.add('flower');
+    flower.style.width = flower.style.height = (Math.random() * 40 + 20) + 'px';
+    flower.style.left = Math.random() * window.innerWidth + 'px';
+    flower.style.animationDuration = (10 + Math.random() * 15) + 's';
+    flower.style.animationDelay = (Math.random() * 10) + 's';
+
+    // Simple flower emoji as flower shape
+    flower.textContent = '🌸';
+    document.body.appendChild(flower);
+
+    // Remove after animation to keep DOM clean
+    setTimeout(() => {
+      flower.remove();
+    }, 25000);
+  }
+
+  // Create multiple flowers periodically
+  setInterval(createFlower, 500);
+
+</script>
+
 </body>
 </html>
