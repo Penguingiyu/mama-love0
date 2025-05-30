@@ -1,330 +1,178 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>موقع حب وورد متحرك - عبد الرحمن وجنى</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
-
-<style>
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  html, body {
-    height: 100%;
-    font-family: 'Cairo', sans-serif;
-    overflow-x: hidden;
-    background: linear-gradient(135deg, #f9f4f7, #e3dff2);
-    color: #333;
-  }
-  main {
-    position: relative;
-    max-width: 900px;
-    margin: 80px auto 60px;
-    padding: 30px 20px;
-    background: rgba(255 255 255 / 0.85);
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(150, 100, 150, 0.2);
-    text-align: center;
-    z-index: 10;
-  }
-  h1 {
-    font-size: 3.8rem;
-    margin-bottom: 0.4em;
-    color: #7b3fbf;
-    text-shadow: 0 2px 8px rgba(123, 63, 191, 0.4);
-  }
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 0.7em;
-    color: #a66dc1;
-    border-bottom: 2px solid #b185d8;
-    padding-bottom: 8px;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  p {
-    font-size: 1.25rem;
-    line-height: 1.7;
-    max-width: 720px;
-    margin: 18px auto 30px;
-    color: #4a3a57;
-    font-weight: 500;
-    position: relative;
-  }
-  .author {
-    position: absolute;
-    top: 2px;
-    right: 0;
-    font-size: 0.85rem;
-    color: #8a5da9;
-    font-weight: 700;
-    font-style: italic;
-  }
-  #langToggle {
-    margin-top: 40px;
-    background: #7b3fbf;
-    border: none;
-    padding: 14px 36px;
-    border-radius: 50px;
-    font-size: 1.15rem;
-    cursor: pointer;
-    color: white;
-    box-shadow: 0 5px 20px rgba(123, 63, 191, 0.45);
-    transition: background 0.35s ease;
-  }
-  #langToggle:hover {
-    background: #a57edd;
-  }
-
-  /* ورود متحركة واضحة */
-  .falling-flower {
-    position: fixed;
-    top: -60px;
-    width: 50px;
-    height: 50px;
-    user-select: none;
-    pointer-events: none;
-    z-index: 9999;
-    animation-name: fallFlower;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    filter: drop-shadow(0 0 2px rgba(150, 80, 160, 0.6));
-    opacity: 0.9;
-  }
-  @keyframes fallFlower {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حب جنى</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: black;
+      color: white;
     }
-    100% {
-      transform: translateY(110vh) rotate(360deg);
-      opacity: 0;
+    section {
+      width: 100vw;
+      min-height: 100vh;
+      padding: 2rem;
+      box-sizing: border-box;
     }
-  }
-
-  @media(max-width:600px) {
+    .slide1 {
+      background: radial-gradient(circle at center, #3d005a, #000);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     h1 {
-      font-size: 2.8rem;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
     }
-    h2 {
-      font-size: 1.5rem;
+    .envelopes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
     }
-    p {
-      font-size: 1rem;
+    .envelope {
+      background-color: #663399;
+      border: 2px solid #fff;
+      border-radius: 8px;
+      width: 100px;
+      height: 70px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.5s;
     }
-    .falling-flower {
-      width: 35px;
-      height: 35px;
+    .envelope:hover {
+      transform: scale(1.05);
     }
-  }
-</style>
+    .poem-text {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      color: black;
+      padding: 0.5rem;
+      border-radius: 8px;
+      width: 180px;
+      z-index: 2;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .envelope:hover .poem-text {
+      display: block;
+    }
+
+    .slide2 {
+      background: linear-gradient(135deg, #2b003a, #000);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-text-block {
+      display: flex;
+      align-items: center;
+      margin: 1rem;
+      flex-direction: row;
+    }
+    .image-text-block img {
+      width: 150px;
+      height: auto;
+      margin: 0 1rem;
+      border-radius: 10px;
+      border: 2px solid white;
+    }
+
+    .slide3 {
+      background-color: #1a001f;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .message-box {
+      background-color: #3d005a;
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 2px solid white;
+      max-width: 90%;
+    }
+    .decorated-name {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #ffb6c1;
+    }
+  </style>
 </head>
 <body>
 
-<main>
-  <h1 id="title">أهلاً بكم في عالمي</h1>
-  <p id="desc">مكان مليان حب، ورود، ومشاعر جياشة من القلب</p>
-  <button id="langToggle">English</button>
-
-  <div id="arabic" class="lang-content active" style="margin-top:40px;">
-    <section>
-      <h2>كلمات من القلب</h2>
-      <p>يا زهرة عمري، أنتِ الروح والنبض، يا دفء أيامي وأجمل أماني. حبكِ ينساب في قلبي مثل نهر لا ينتهي، وروحك تسكن كل جزء مني.
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>ذكريات لا تُنسى</h2>
-      <p>ضحكتكِ تملأ حياتي بهجة، صوتك يهدئ روحي، ويدك الحانية تزرع الأمان في كل لحظة.
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>مشاعر جياشة</h2>
-      <p>حبكِ يفيض كالنهر، ينبض في قلبي ويغمر روحي. وجودك معي هو حياتي، ولا شيء يضاهي عظمة حبكِ.
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>رسالة حب خاصة</h2>
-      <p>أمي، يا أجمل هدية منحني الله إياها، أنتِ السند والملاذ، وأغلى ما أملك. مهما كتبت من كلمات لن أوفيك حقك، فأنتِ النور الذي يضيء حياتي.
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>شكر وامتنان</h2>
-      <p>أشكرك على كل تضحياتك، على كل لحظة صبر، على كل دمعة لم تذرفيها أمامي. أنتِ قدوتي ومصدر قوتي.
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>أحلام وأماني</h2>
-      <p>أتمنى لكِ حياة مليئة بالسعادة، والصحة، والسلام، وأن أكون دومًا سببًا في فرحتك ورضاك.
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>كلمات ودعاء</h2>
-      <p>اللهم احفظ أمي وبارك في عمرها، وامنحها راحة البال، وارزقها أجمل أيام العمر.
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>شعر من القلب</h2>
-      <p>يا من أضاءت لي الدروب بنور حنانها<br/>
-      وأعطتني من الحب أجمل ألوانها<br/>
-      في حضنها وجدت السلام والدفء<br/>
-      يا أمي، بحبك قلبي يعانق الأزمان
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>أنشودة حب</h2>
-      <p>أمي يا نبع الحنان العذب<br/>
-      يا أغلى من روحي والنبض<br/>
-      أضاءت حياتي بحبها<br/>
-      وأعطتني في الدنيا كل شيء وأغلى حب
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>أجمل الأماني</h2>
-      <p>أسأل الله أن يحفظك لي<br/>
-      ويملأ حياتك فرحًا ويغنيك عن كل هم<br/>
-      يا من بسمة وجهها تمحو الحزن<br/>
-      وأجمل هدية أعطاها لي الزمن
-        <span class="author">- جنى</span>
-      </p>
-    </section>
-    <section>
-      <h2>روح أمي</h2>
-      <p>في عينيك أرى الدنيا بألوانها<br/>
-      وفي قلبك دفء يملأ الأحلام<br/>
-      أمي يا زهرة العمر وربيع حياتي<br/>
-      بحبك أعيش وأحلم بأجمل الأيام
-        <span class="author">- جنى</span>
-      </p>
-    </section>
+<!-- الشريحة الأولى -->
+<section class="slide1">
+  <h1>محبوبة قلبي جنودتي</h1>
+  <div class="envelopes">
+    <div class="envelope"><div class="poem-text">بحبك من قبل ما أعرفك، كأنك حلم قديم.</div></div>
+    <div class="envelope"><div class="poem-text">ضحكتك أجمل موسيقى سمعتها.</div></div>
+    <div class="envelope"><div class="poem-text">كلماتك بتدخل القلب بدون استئذان.</div></div>
+    <div class="envelope"><div class="poem-text">صوتك دفا في عز البرد.</div></div>
+    <div class="envelope"><div class="poem-text">وجودك جنبي هو الأمان الحقيقي.</div></div>
+    <div class="envelope"><div class="poem-text">بحس بالونس في كلامك حتى لو بسيط.</div></div>
+    <div class="envelope"><div class="poem-text">كل حاجة فيكي بتفرحني.</div></div>
+    <div class="envelope"><div class="poem-text">عيونك فيها راحة مش لاقيها في الدنيا كلها.</div></div>
+    <div class="envelope"><div class="poem-text">بحس أني أنا لما أتكلم معاكي.</div></div>
+    <div class="envelope"><div class="poem-text">بحب فيكي تفاصيلك الصغيرة قبل الكبيرة.</div></div>
+    <div class="envelope"><div class="poem-text">وجودك فرق في حياتي كتير أوي.</div></div>
+    <div class="envelope"><div class="poem-text">كل لحظة معاك لها معنى خاص.</div></div>
+    <div class="envelope"><div class="poem-text">جمالك مش بس شكل، ده روح كمان.</div></div>
+    <div class="envelope"><div class="poem-text">لو عرفتي إنتي غالية قد إيه، عمرك ما هتشكّي.</div></div>
+    <div class="envelope"><div class="poem-text">بضحكتي وانتي السبب، بحمد ربنا عليكي.</div></div>
+    <div class="envelope"><div class="poem-text">انتي النسمة اللي بترطب يومي.</div></div>
+    <div class="envelope"><div class="poem-text">مافيش كلام يوصف قدرك في قلبي.</div></div>
+    <div class="envelope"><div class="poem-text">لو هختار من الدنيا، هاختارك إنتي.</div></div>
+    <div class="envelope"><div class="poem-text">قلبك أنضف حاجة عرفتها.</div></div>
+    <div class="envelope"><div class="poem-text">كل مرة أسمع صوتك، بحس إني بخير.</div></div>
   </div>
+</section>
 
-  <div id="english" class="lang-content" style="display:none; margin-top:40px;">
-    <section>
-      <h2>Words From The Heart</h2>
-      <p>You are the flower of my life, the purest love, the warmth of my days and my sweetest dreams. Your love flows through my heart like an endless river, your soul inhabits every part of me.
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Unforgettable Memories</h2>
-      <p>Your laughter fills my life with joy, your voice calms my soul, and your gentle hand plants safety in every moment.
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Deep Emotions</h2>
-      <p>Your love overflows like a river, pulsing in my heart and flooding my soul. Having you with me is my life, and nothing compares to the greatness of your love.
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>A Special Love Message</h2>
-      <p>Mom, you are the most beautiful gift God gave me. You are my support and refuge, and my dearest possession. No words can express your worth; you are the light that brightens my life.
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Thanks & Gratitude</h2>
-      <p>Thank you for all your sacrifices, for every moment of patience, for every tear you held back for me. You are my role model and source of strength.
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Dreams & Wishes</h2>
-      <p>I wish you a life full of happiness, health, and peace, and may I always be a reason for your joy and contentment.
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Words & Prayers</h2>
-      <p>May God protect my mom, bless her life, grant her peace of mind, and gift her the most beautiful days of life.
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Poetry From The Heart</h2>
-      <p>You who lit my paths with the light of kindness<br/>
-      And gave me the most beautiful colors of love<br/>
-      In your embrace I found peace and warmth<br/>
-      Mom, with your love my heart embraces time
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Love Hymn</h2>
-      <p>Mom, fountain of gentle care<br/>
-      Dearest than my soul and my heartbeat<br/>
-      You brightened my life with your love<br/>
-      And gave me everything and the sweetest love
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Sweetest Wishes</h2>
-      <p>I pray God keeps you safe for me<br/>
-      And fills your life with joy and lifts every sorrow<br/>
-      Your smile erases all sadness<br/>
-      The most beautiful gift that time has given me
-        <span class="author">- Jana</span>
-      </p>
-    </section>
-    <section>
-      <h2>Mom's Spirit</h2>
-      <p>In your eyes, I see the world in colors<br/>
-      In your heart, warmth fills my dreams<br/>
-      Mom, flower of my life and spring of my days<br/>
-      With your love, I live and dream the sweetest days
-        <span class="author">- Jana</span>
-      </p>
-    </section>
+<!-- الشريحة الثانية -->
+<section class="slide2">
+  <h1>يا أغلى وأعز ما أملك</h1>
+  <div class="image-text-block">
+    <img src="icon.png" alt="صورة 1">
+    <p>بحس إن ضحكتك بتنورلي دنيتي كلها، كأنك شعاع نور في يوم عتم.</p>
   </div>
-</main>
+  <div class="image-text-block">
+    <p>كل مرة ببص في عيونك حتى لو صورة، بحس إني في أمان.</p>
+    <img src="icon.png" alt="صورة 2">
+  </div>
+  <div class="image-text-block">
+    <img src="icon.png" alt="صورة 3">
+    <p>انتي مصدر طاقتي وسبب ابتسامتي.</p>
+  </div>
+</section>
 
-<!-- ورود متحركة أوضح -->
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:5%; animation-duration: 18s; animation-delay: 0s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:15%; animation-duration: 22s; animation-delay: 2s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:25%; animation-duration: 16s; animation-delay: 4s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:35%; animation-duration: 20s; animation-delay: 1s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:45%; animation-duration: 19s; animation-delay: 5s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:55%; animation-duration: 17s; animation-delay: 1s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:65%; animation-duration: 21s; animation-delay: 4s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:75%; animation-duration: 23s; animation-delay: 3.5s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:85%; animation-duration: 15s; animation-delay: 7s;" />
-<img src="https://i.postimg.cc/W3H3nbbM/flower-pink.png" alt="ورد" class="falling-flower" style="left:95%; animation-duration: 18s; animation-delay: 6.5s;" />
-
-<script>
-  const toggleBtn = document.getElementById('langToggle');
-  const arabicContent = document.getElementById('arabic');
-  const englishContent = document.getElementById('english');
-
-  toggleBtn.addEventListener('click', () => {
-    if (arabicContent.style.display !== 'none') {
-      arabicContent.style.display = 'none';
-      englishContent.style.display = 'block';
-      toggleBtn.textContent = 'العربية';
-      document.getElementById('title').textContent = 'Welcome to My World';
-      document.getElementById('desc').textContent = 'A place full of love, flowers, and heartfelt emotions';
-    } else {
-      arabicContent.style.display = 'block';
-      englishContent.style.display = 'none';
-      toggleBtn.textContent = 'English';
-      document.getElementById('title').textContent = 'أهلاً بكم في عالمي';
-      document.getElementById('desc').textContent = 'مكان مليان حب، ورود، ومشاعر جياشة من القلب';
-    }
-  });
-</script>
+<!-- الشريحة الثالثة -->
+<section class="slide3">
+  <div class="decorated-name">🌸 جنى 🌸</div>
+  <div class="message-box">
+    <p>لأغلى وحدة، جنودتي أنت حاجة مكنتش هتخيل انها هتبقا معايا او اجنبي في يوم،</p>
+    <p>لطالما شفتك ياقوته مش مجرد انسانه عادية، جنى وجودك خلاني اقوى بكثير،</p>
+    <p>مش هتتخيلي قد ايه ان تواجدك معي عمل تغيير كبير في حياتي،</p>
+    <p>أنت اغلى شيء في حياتي ياجنى،</p>
+    <p>حبيت اقولك كل عام وأنت احلى واغلى وارق انسانه عرفتها،</p>
+    <p>يا اميرة وتاج راسي، اتمنى لك تكوني بخير،</p>
+    <p>حياة هنيه، هدوء نفسي، والاهم تبقي سعيدة،</p>
+    <p>جنودتي انا اسعد انسان بيكي واكيد مش هكون عايز ابعد عنك،</p>
+    <p>وجودك معي جميل مش مزعج انا بحبه جدا،</p>
+    <p>عمرك ما كنتي مزعجه ليا، أنت اغلى حاجة املكها ومش عايزها تبعد من بين ايدي،</p>
+    <p>وعايز احافظ عليها من كل شيء، ربنا يحفظك،</p>
+    <p>بحبك يا جنودتي.</p>
+  </div>
+</section>
 
 </body>
 </html>
